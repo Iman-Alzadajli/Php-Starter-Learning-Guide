@@ -1,181 +1,176 @@
 <?php
-/*
- * PHP Arrays Tutorial
- * This file demonstrates array creation and manipulation in PHP including:
- * - Indexed arrays
- * - Associative arrays
- * - Multidimensional arrays
- * - Array creation methods
- * - Array access and modification
- * - Array iteration
- * - JSON conversion
- * 
- * Joonguini Programming in the Kitchen
- */
+// =====================================
+//         PHP Arrays by Iman
+// =====================================
 
-/* ---------- Arrays ---------- */
-
-// Array - Variable that holds multiple values
 /*
-  - Indexed - Arrays with a numeric index
-  - Associative - Arrays with named keys
-  - Multi-dimensional - Arrays containing one or more arrays
+  In this file I'm practicing how arrays work in PHP.
+  Arrays help me store multiple values in one variable.
+  There are 3 main types:
+  - Indexed arrays (use numbers)
+  - Associative arrays (use custom keys)
+  - Multidimensional arrays (arrays inside arrays)
 */
 
-// Indexed Array
-$people = array('joe', 'Jeremy', 'Sara');
-$ids = [23, 55, 12];
+/* ---------- Indexed Arrays ---------- */
+
+$people = ['iman', 'Sara', 'Ahmed']; 
 $cars = ['Honda', 'Toyota', 'Ford'];
-$cars[3] = 'Chevy';
-$cars[] = 'BMW';
+$cars[3] = 'Chevy'; // add  new at index 3
+$cars[] = 'BMW';    // add to the end
 
-// Associative Array
-$people = array('joe' => 35, 'Jeremy' => 22, 'Sara' => 25);
-$ids = [22 => 'joe', 44 => 'Jeremy', 63 => 'Sara'];
+/* ---------- Associative Arrays ---------- */
 
-// Multi-dimensional Array
-$cars = array(
-  array('Honda', 20, 10),
-  array('Toyota', 30, 20),
-  array('Ford', 23, 12),
-);
+$ages = ['Nasra' => 30, 'Sara' => 25];
+$agesss = [22 => 'iman', 44 => 'Sara'];
 
-echo $cars[1][2];
-echo '<br>';
+/* ---------- Multidimensional Arrays ---------- */
 
-// Associative Array with person data
-$person = array(
-  'first_name' => 'joe',
-  'last_name' => 'Joonguini',
-  'email' => 'joe@gmail.com',
-);
-
-echo $person['first_name'];
-echo '<br>';
-
-// You can also create arrays using the short syntax
-$person2 = [
-  'first_name' => 'joe',
-  'last_name' => 'Joonguini',
-  'email' => 'joe@gmail.com',
+$cars = [
+  ['Honda', 20, 10],
+  ['Toyota', 30, 20], //this one 
+  ['Ford', 23, 12],
 ];
 
-echo $person2['first_name'];
+echo $cars[1][2]; // prints 20
+echo '<br>'; // (new line in HTML output)
+
+/* ---------- Person Data Example ---------- */
+
+$person = [
+  'first_name' => 'iman',
+  'last_name' => 'Alzadajli',
+  'email' => 'iman@gmail.com',
+];
+
+echo $person['first_name']; // prints "iman"
 echo '<br>';
 
-// Multi-dimensional Associative Array
-$people = array(
-  array(
-    'first_name' => 'joe',
-    'last_name' => 'Joonguini',
-    'email' => 'joe@gmail.com',
-  ),
-  array(
-    'first_name' => 'Jeremy',
-    'last_name' => 'McPeak',
-    'email' => 'jeremy@gmail.com',
-  ),
-  array(
+/* ---------- Short Syntax ---------- */
+
+$person2 = [
+  'first_name' => 'iman',
+  'last_name' => 'Alzadajli',
+  'email' => 'iman@gmail.com',
+];
+
+echo $person2['first_name']; // prints "iman"
+echo '<br>';
+
+/* ---------- Array of People ---------- */
+
+$people = [
+  [
+    'first_name' => 'iman',
+    'last_name' => 'Alzadajli',
+    'email' => 'iman@gmail.com',
+  ],
+  [
     'first_name' => 'Sara',
-    'last_name' => 'Jones',
+    'last_name' => 'Ali',
     'email' => 'sara@gmail.com',
-  ),
-);
+  ],
+];
 
-echo $people[1]['email'];
+echo $people[1]['email']; // prints "sara@gmail.com"
 echo '<br>';
 
-// Convert to JSON
-$jsonobj = '{"first_name":"joe","last_name": "Joonguini","email":"joe@gmail.com"}';
+/* ---------- JSON Conversion ---------- */
+
+// JSON string to object
+$jsonobj = '{"first_name":"iman",
+"last_name":"Alzadajli",
+"email":"iman@gmail.com"}';
+
 $obj = json_decode($jsonobj);
-echo $obj->first_name;
-echo '<br>';
+echo $obj->first_name; // prints "iman"
+echo '<br>'; 
 
-// Convert array to JSON
-$arr = array('first_name' => 'joe', 'last_name' => 'Joonguini', 'email' => 'joe@gmail.com');
+// Array to JSON
+$arr = ['first_name' => 'iman', 'last_name' => 'Alzadajli', 'email' => 'iman@gmail.com'];
 $json = json_encode($arr);
-echo $json;
+echo $json; // prints '{"first_name":"iman","last_name":"Alzadajli","email":"iman@gmail.com"}'
 echo '<br>';
 
-// Array functions
-$fruits = array('apple', 'orange', 'pear');
+/* ---------- Array Functions ---------- */
 
-// Get length
-echo count($fruits);
+$fruits = ['apple', 'orange', 'pear'];
+
+// Count items
+echo count($fruits); // prints 3
 echo '<br>';
 
-// Search array
-var_dump(in_array('apple', $fruits));
+// Check if item exists
+var_dump(in_array('apple', $fruits)); // prints bool(true)
 echo '<br>';
 
-// Add to array
+// Add items
 $fruits[] = 'grape';
 array_push($fruits, 'blueberry', 'strawberry');
 array_unshift($fruits, 'mango');
 
-// Remove from array
-array_pop($fruits);
-array_shift($fruits);
-unset($fruits[2]);
+// Remove items
+array_pop($fruits);    // removes last item "strawberry"
+array_shift($fruits);  // removes first item "mango"
+unset($fruits[2]);     // removes 3rd item
 
 // Split into chunks
-$chunked_array = array_chunk($fruits, 2);
-print_r($chunked_array);
+$chunked = array_chunk($fruits, 2);
+print_r($chunked); // prints array chunks like [[orange, pear], [grape, blueberry]]
 echo '<br>';
 
-// Merge arrays
+/* ---------- Merge & Spread ---------- */
+
 $arr1 = [1, 2, 3];
 $arr2 = [4, 5, 6];
 $arr3 = array_merge($arr1, $arr2);
-print_r($arr3);
+print_r($arr3); // prints [1, 2, 3, 4, 5, 6]
 echo '<br>';
 
-// Spread operator (PHP 7.4+)
 $arr4 = [...$arr1, ...$arr2];
-print_r($arr4);
+print_r($arr4); // prints [1, 2, 3, 4, 5, 6]
 echo '<br>';
 
-// Combine arrays
-$a = ['green', 'red', 'yellow'];
-$b = ['avocado', 'apple', 'banana'];
-$c = array_combine($a, $b);
-print_r($c);
+/* ---------- Combine & Keys/Values ---------- */
+
+$colors = ['green', 'red', 'yellow'];
+$fruits = ['avocado', 'apple', 'banana'];
+$combined = array_combine($colors, $fruits);
+print_r($combined); 
+// prints ['green'=>'avocado', 'red'=>'apple', 'yellow'=>'banana']
 echo '<br>';
 
-// Array keys
-$keys = array_keys($c);
-print_r($keys);
+$keys = array_keys($combined);
+print_r($keys); // prints ['green', 'red', 'yellow']
 echo '<br>';
 
-// Array values
-$values = array_values($c);
-print_r($values);
+$values = array_values($combined);
+print_r($values); // prints ['avocado', 'apple', 'banana']
 echo '<br>';
 
-// Flip array
-$flipped = array_flip($c);
-print_r($flipped);
+$flipped = array_flip($combined);
+print_r($flipped); 
+// prints ['avocado'=>'green', 'apple'=>'red', 'banana'=>'yellow']
 echo '<br>';
 
-// Range
+/* ---------- Range, Map, Filter, Reduce ---------- */
+
 $numbers = range(1, 20);
-print_r($numbers);
+print_r($numbers); // prints [1, 2, 3, ..., 20]
 echo '<br>';
 
 // Map
-$newNumbers = array_map(function($number) {
-  return "Number ${number}";
-}, $numbers);
-print_r($newNumbers);
+$newNumbers = array_map(fn($n) => "Number $n", $numbers);
+print_r($newNumbers); // prints ["Number 1", "Number 2", ..., "Number 20"]
 echo '<br>';
 
 // Filter
-$lessThan10 = array_filter($numbers, fn($number) => $number <= 10);
-print_r($lessThan10);
+$lessThan10 = array_filter($numbers, fn($n) => $n <= 10);
+print_r($lessThan10); // prints [1, 2, ..., 10]
 echo '<br>';
 
-// Reduce
-$sum = array_reduce($numbers, fn($carry, $number) => $carry + $number);
-echo $sum;
+// Reduce (Sum)
+$sum = array_reduce($numbers, fn($carry, $n) => $carry + $n);
+echo $sum; // prints 210 (sum of 1 to 20)
 echo '<br>';
 ?>
